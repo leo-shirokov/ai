@@ -2,7 +2,7 @@
     "name": "ai",
     "private": true,
     "version": "0.0.0",
-    "homepage": "http://leo-shirokov.github.io/ai",
+    "homepage": "https://leo-shirokov.github.io/ai",
     "type": "module",
     "scripts": {
         "predeploy": "npm run build",
