@@ -4,6 +4,7 @@ import { BiSend } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
 import TextareaAutosize from "react-textarea-autosize";
 import ChatResponse from "../ChatResponse/ChatResponse";
+import "./loader.css";
 
 window.onload = function () {
     document.getElementById("prompt-input").focus();
@@ -249,7 +250,7 @@ const CreateChat = () => {
                     </p>
                 </div>
             </form>
-            {loading && <p>Loading...</p>}
+            {loading && <p className="loader"></p>}
             {chatResponses.length > 0 &&
                 chatResponses.map((answer) => (
                     <ChatResponse key={answer.key} response={answer} />
