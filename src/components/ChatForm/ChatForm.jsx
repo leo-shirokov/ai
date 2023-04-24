@@ -102,8 +102,8 @@ const CreateChat = () => {
                         <input
                             className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
-                            // inputMode="decimal"
-                            // pattern="\d*"
+                            inputMode="decimal"
+                            pattern="\d*"
                             min="1"
                             max="5"
                             value={variability}
@@ -113,6 +113,8 @@ const CreateChat = () => {
                         <input
                             className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
+                            inputMode="decimal"
+                            pattern="\d*"
                             step="0.1"
                             min="0.1"
                             max="1.9"
@@ -123,6 +125,8 @@ const CreateChat = () => {
                         <input
                             className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
+                            inputMode="decimal"
+                            pattern="\d*"
                             step="0.1"
                             min="0"
                             max="1"
