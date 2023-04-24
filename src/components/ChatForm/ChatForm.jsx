@@ -67,7 +67,7 @@ const CreateChat = () => {
             >
                 <div
                     className="flex flex-col w-full relative border-transparent bg-zinc-700 text-md font-normal 
-                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.10)] ring-1 ring-zinc-900 text-zinc-300 mb-7"
+                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mb-8"
                 >
                     <TextareaAutosize
                         className="w-full resize-none border-0 bg-transparent py-2 pl-5 pr-14 
@@ -88,18 +88,19 @@ const CreateChat = () => {
                         <BiSend />
                     </button>
                 </div>
+
                 <div className="flex justify-center gap-x-10 items-center md:gap-x-5 md:flex-col">
                     <div className="flex justify-center items-center gap-x-10 shrink-0">
                         <div>
                             <input
-                                className="uk-checkbox"
+                                className="uk-checkbox shadow-[0_0_15px_rgba(0,0,0,0.50)]"
                                 type="checkbox"
                                 checked={checked}
                                 onChange={(e) => setChecked(e.target.checked)}
                             />
                         </div>
                         <input
-                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.10)] focus:bg-zinc-700"
+                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
                             // inputMode="decimal"
                             // pattern="\d*"
@@ -110,7 +111,7 @@ const CreateChat = () => {
                             onChange={(e) => setVariability(+e.target.value)}
                         />
                         <input
-                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.10)] focus:bg-zinc-700"
+                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
                             step="0.1"
                             min="0.1"
@@ -120,7 +121,7 @@ const CreateChat = () => {
                             onChange={(e) => setTemperature(+e.target.value)}
                         />
                         <input
-                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.10)] focus:bg-zinc-700"
+                            className="uk-input h-7 bg-zinc-700 rounded-md border-transparent shadow-[0_0_15px_rgba(0,0,0,0.50)] focus:bg-zinc-700"
                             type="number"
                             step="0.1"
                             min="0"
@@ -132,7 +133,7 @@ const CreateChat = () => {
                     </div>
                     <div>
                         <input
-                            className="uk-range w-72 md:w-60 md:mt-8"
+                            className="uk-range w-72 shadow-[0_0_15px_rgba(0,0,0,0.50)] md:w-60 md:mt-8"
                             type="range"
                             step="380"
                             min="148"
@@ -142,6 +143,28 @@ const CreateChat = () => {
                             onChange={(e) => setTokens(+e.target.value)}
                         />
                     </div>
+                </div>
+                <a
+                    href="#toggle-animation"
+                    uk-icon="icon: info; ratio: 1"
+                    className="stroke-zinc-700"
+                    uk-toggle="target: #toggle-animation; animation: uk-animation-fade"
+                ></a>
+                <div
+                    id="toggle-animation"
+                    uk-drop="mode: click"
+                    className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
+                    bg-zinc-700 rounded-md text-zinc-400"
+                >
+                    - Checkbox: enable for chat mode
+                    <br />
+                    - Number of answer options: variability, from 1 to 5<br />
+                    - Variety: higher is more creative, lower is more
+                    deterministic (from 0.1 to 1.9)
+                    <br />
+                    - Decreased likelihood of repeated responses in chat mode,
+                    from 0 to 1<br />- Response length scale of six positions,
+                    the higher, the more complete the answer
                 </div>
             </form>
             {chatResponses.length > 0 &&
