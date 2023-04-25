@@ -6,10 +6,6 @@ import TextareaAutosize from "react-textarea-autosize";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import "./loader.css";
 
-// window.onload = function () {
-//     document.getElementById("prompt-input").focus();
-// };
-
 const systemMessage = {
     role: "system",
     content: "You are a helpful assistant",
@@ -23,26 +19,27 @@ const CreateChat = () => {
     const [temperature, setTemperature] = useState(0.7);
     const [penalty, setPenalty] = useState(0);
     const [tokens, setTokens] = useState(2048);
-
     const [chatResponses, setChatResponses] = useState([]);
 
     const focus = useRef(null);
     const scrolled = useRef(null);
 
-    useEffect(() => {
-        if (scrolled) {
-            scrolled.current.addEventListener("DOMNodeInserted", (event) => {
-                const { currentTarget: target } = event;
-                target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-            });
-        }
-        focus.current.focus();
-    }, []);
+    const onInsertNode = (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+        focus.current.blur();
+    };
 
     const handleKeyDown = (e) => {
         if (e.code !== "Enter") return;
         sendMessage(e);
     };
+
+    useEffect(() => {
+        // if (scrolled)
+        scrolled.current.addEventListener("DOMNodeInserted", onInsertNode);
+        focus.current.focus();
+    }, []);
 
     const setDefaultValues = () => {
         setVariability(variability);
