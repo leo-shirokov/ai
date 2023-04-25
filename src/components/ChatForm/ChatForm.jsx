@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { openChatGpt } from "../../../chatGptApi";
 import { BiSend } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
