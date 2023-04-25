@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { openChatGpt } from "../../../chatGptApi";
 import { BiSend } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
@@ -26,7 +26,16 @@ const CreateChat = () => {
 
     const [chatResponses, setChatResponses] = useState([]);
 
-    const scrolled = useRef();
+    const scrolled = useRef(null);
+
+    useEffect(() => {
+        if (scrolled) {
+            scrolled.current.addEventListener("DOMNodeInserted", (event) => {
+                const { currentTarget: target } = event;
+                target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+            });
+        }
+    }, []);
 
     const handleKeyDown = (e) => {
         if (e.code !== "Enter") return;
@@ -69,7 +78,6 @@ const CreateChat = () => {
                 },
             ]);
             setLoading(false);
-            // scrolled.current?.scrollTop = elem.scrollHeight;
         } catch (error) {
             console.log("error sending message: ", error.message);
         }
