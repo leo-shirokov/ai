@@ -266,13 +266,14 @@ const CreateChat = () => {
                         </p>
                     </div>
                     <button
-                        className="absolute right-3 text-zinc-500 hover:text-zinc-600 transition-all"
+                        className="absolute right-3 text-md text-zinc-400 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-500 hover:ring-1 transition-all"
                         type="button"
                         onClick={() => {
                             setChatResponses([]);
                         }}
                     >
-                        New Chat
+                        New chat
                     </button>
                 </div>
             </form>
