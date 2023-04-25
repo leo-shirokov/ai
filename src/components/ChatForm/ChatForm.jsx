@@ -6,9 +6,9 @@ import TextareaAutosize from "react-textarea-autosize";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import "./loader.css";
 
-window.onload = function () {
-    document.getElementById("prompt-input").focus();
-};
+// window.onload = function () {
+//     document.getElementById("prompt-input").focus();
+// };
 
 const systemMessage = {
     role: "system",
@@ -26,6 +26,7 @@ const CreateChat = () => {
 
     const [chatResponses, setChatResponses] = useState([]);
 
+    const focus = useRef(null);
     const scrolled = useRef(null);
 
     useEffect(() => {
@@ -35,6 +36,7 @@ const CreateChat = () => {
                 target.scroll({ top: target.scrollHeight, behavior: "smooth" });
             });
         }
+        focus.current.focus();
     }, []);
 
     const handleKeyDown = (e) => {
@@ -84,7 +86,7 @@ const CreateChat = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col-reverse">
+        <div className="w-full h-full flex flex-col">
             <form
                 className="w-full"
                 onKeyDown={handleKeyDown}
@@ -92,12 +94,12 @@ const CreateChat = () => {
             >
                 <div
                     className="flex flex-col w-full relative border-transparent bg-zinc-700 text-md font-normal 
-                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mt-5 mb-10"
+                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mt-px mb-6 md:mt-0"
                 >
                     <TextareaAutosize
                         className="w-full resize-none border-0 bg-transparent py-2 pl-5 pr-14 
                         caret-zinc-400 placeholder-zinc-500 focus:outline-none"
-                        id="prompt-input"
+                        ref={focus}
                         type="text"
                         minRows="1"
                         maxRows="10"
@@ -114,7 +116,7 @@ const CreateChat = () => {
                     </button>
                 </div>
 
-                <div className="flex justify-center gap-x-10 items-center md:flex-col md:gap-y-7">
+                <div className="flex justify-center gap-x-10 items-center md:flex-col md:gap-y-5">
                     <div className="flex justify-center items-center md:self-start">
                         <input
                             className="uk-checkbox shadow-[0_0_15px_rgba(0,0,0,0.50)]"
@@ -126,7 +128,7 @@ const CreateChat = () => {
                             Mark once to start a chat conversation
                         </p>
                     </div>
-                    <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-8">
+                    <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-6">
                         <div className="w-full flex flex-col justify-center items-center gap-y-2">
                             <div className="w-full flex justify-between items-center text-xs">
                                 <p>1</p>
@@ -174,7 +176,7 @@ const CreateChat = () => {
                             />
                         </div>
                     </div>
-                    <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-8">
+                    <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-6">
                         <div className="w-full flex flex-col justify-center items-center gap-y-2">
                             <div className="w-full flex justify-between items-center text-xs">
                                 <p>0</p>
@@ -218,53 +220,63 @@ const CreateChat = () => {
                     </div>
                 </div>
                 <div className="invisible">Open settings</div>
-                <a
-                    href="#toggle-animation"
-                    uk-icon="icon: info; ratio: 1"
-                    className="stroke-zinc-600"
-                    uk-toggle="target: #toggle-animation; animation: uk-animation-fade"
-                ></a>
-
-                <div
-                    id="toggle-animation"
-                    uk-drop="mode: click"
-                    className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
-                    bg-zinc-700 rounded-md text-zinc-400"
-                >
-                    <p className="md:hidden">
-                        <span className="text-zinc-900 font-bold">
-                            Checkbox:
-                        </span>
-                        &nbsp; mark once to start chat mode conversation
-                    </p>
-                    <p>
-                        <span className="text-zinc-900 font-bold">
-                            Scale-1.
-                        </span>
-                        &nbsp;Variability: number of answer options (from 1 to
-                        5)
-                    </p>
-                    <p>
-                        <span className="text-zinc-900 font-bold">
-                            Scale-2.
-                        </span>
-                        &nbsp; Variety: higher is more creative, lower is more
-                        deterministic (from 0.2 to 2)
-                    </p>
-                    <p>
-                        <span className="text-zinc-900 font-bold">
-                            Scale-3.
-                        </span>
-                        &nbsp; Penalty: decreased likelihood of repeated
-                        responses in chat mode (from 0 to 1)
-                    </p>
-                    <p>
-                        <span className="text-zinc-900 font-bold">
-                            Scale-4.
-                        </span>
-                        &nbsp; Response length: the higher, the more complete
-                        the answer (from 148 to 2048 tokens)
-                    </p>
+                <div className="relative">
+                    <a
+                        href="#toggle-animation"
+                        uk-icon="icon: info; ratio: 1"
+                        className="stroke-zinc-600"
+                        uk-toggle="target: #toggle-animation; animation: uk-animation-fade"
+                    ></a>
+                    <div
+                        id="toggle-animation"
+                        uk-drop="mode: click"
+                        className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
+                    bg-zinc-700 rounded-md text-zinc-400 p-5"
+                    >
+                        <p className="md:hidden">
+                            <span className="text-zinc-900 font-bold">
+                                Checkbox:
+                            </span>
+                            &nbsp; check once to start chat mode conversation
+                        </p>
+                        <p>
+                            <span className="text-zinc-900 font-bold">
+                                Scale-1.
+                            </span>
+                            &nbsp;Variability: number of answer options (from 1
+                            to 5)
+                        </p>
+                        <p>
+                            <span className="text-zinc-900 font-bold">
+                                Scale-2.
+                            </span>
+                            &nbsp; Variety: higher is more creative, lower is
+                            more deterministic (from 0.2 to 2)
+                        </p>
+                        <p>
+                            <span className="text-zinc-900 font-bold">
+                                Scale-3.
+                            </span>
+                            &nbsp; Penalty: decreased likelihood of repeated
+                            responses in chat mode (from 0 to 1)
+                        </p>
+                        <p>
+                            <span className="text-zinc-900 font-bold">
+                                Scale-4.
+                            </span>
+                            &nbsp; Response length: the higher, the more
+                            complete the answer is (from 148 to 2048 tokens)
+                        </p>
+                    </div>
+                    <button
+                        className="absolute right-3 text-zinc-500 hover:text-zinc-600 transition-all"
+                        type="button"
+                        onClick={() => {
+                            setChatResponses([]);
+                        }}
+                    >
+                        New Chat
+                    </button>
                 </div>
             </form>
             <div ref={scrolled} className="overflow-auto">
