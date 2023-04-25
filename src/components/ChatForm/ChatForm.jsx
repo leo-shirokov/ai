@@ -124,6 +124,9 @@ const CreateChat = () => {
                 </div>
 
                 <div className="flex justify-center gap-x-10 items-center md:flex-col md:gap-y-5">
+                    {/* <div className="relative">
+                        <span className="loader"></span>
+                    </div> */}
                     <div className="flex justify-center items-center md:self-start">
                         <input
                             className="uk-checkbox shadow-[0_0_15px_rgba(0,0,0,0.50)]"
@@ -285,9 +288,10 @@ const CreateChat = () => {
                     >
                         New chat
                     </button>
+                    {loading && <span className="loader"></span>}
                 </div>
             </form>
-            {loading && <span className="loader"></span>}
+            {/* {loading && <div className="loader"></div>} */}
             <div ref={scrolled} className="overflow-auto mt-4">
                 {chatResponses.length > 0 &&
                     chatResponses.map((answer) => (
