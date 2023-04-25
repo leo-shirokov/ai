@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { openChatGpt } from "../../../chatGptApi";
 import { BiSend } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
@@ -26,48 +26,57 @@ const CreateChat = () => {
 
     const [chatResponses, setChatResponses] = useState([]);
 
+    const scrolled = useRef();
+
     const handleKeyDown = (e) => {
         if (e.code !== "Enter") return;
         sendMessage(e);
     };
-    const sendMessage = async (e) => {
-        e.preventDefault();
 
-        setLoading(true);
-        setPrompt("");
-
-        const newQuestion = [
-            ...chatResponses.map((el) => el.message),
-            prompt,
-        ].join("\n");
-
-        const response = await openChatGpt({
-            prompt: newQuestion,
-            systemMessage: checked ? [systemMessage] : [],
-            variability,
-            temperature,
-            penalty,
-            tokens,
-        });
-
+    const setDefaultValues = () => {
         setVariability(variability);
         setTemperature(temperature);
         setPenalty(penalty);
         setChecked(false);
         setTokens(tokens);
+    };
 
-        setChatResponses((prev) => [
-            ...prev,
-            {
-                key: uuidv4(),
-                message: response,
-            },
-        ]);
-        setLoading(false);
+    const sendMessage = async (e) => {
+        e.preventDefault();
+        try {
+            setLoading(true);
+            setPrompt("");
+
+            const newQuestion = [
+                ...chatResponses.map((el) => el.message),
+                prompt,
+            ].join("\n");
+
+            const response = await openChatGpt({
+                prompt: newQuestion,
+                systemMessage: checked ? [systemMessage] : [],
+                variability,
+                temperature,
+                penalty,
+                tokens,
+            });
+            setDefaultValues();
+            setChatResponses((prev) => [
+                ...prev,
+                {
+                    key: uuidv4(),
+                    message: response,
+                },
+            ]);
+            setLoading(false);
+            // scrolled.current?.scrollTop = elem.scrollHeight;
+        } catch (error) {
+            console.log("error sending message: ", error.message);
+        }
     };
 
     return (
-        <>
+        <div className="w-full h-full flex flex-col-reverse">
             <form
                 className="w-full"
                 onKeyDown={handleKeyDown}
@@ -250,12 +259,14 @@ const CreateChat = () => {
                     </p>
                 </div>
             </form>
-            {loading && <p className="loader"></p>}
-            {chatResponses.length > 0 &&
-                chatResponses.map((answer) => (
-                    <ChatResponse key={answer.key} response={answer} />
-                ))}
-        </>
+            <div ref={scrolled} className="overflow-auto">
+                {loading && <span className="loader bottom-1"></span>}
+                {chatResponses.length > 0 &&
+                    chatResponses.map((answer) => (
+                        <ChatResponse key={answer.key} response={answer} />
+                    ))}
+            </div>
+        </div>
     );
 };
 
