@@ -92,7 +92,7 @@ const CreateChat = () => {
             >
                 <div
                     className="flex flex-col w-full relative border-transparent bg-zinc-700 text-md font-normal 
-                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mb-10"
+                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mt-5 mb-10"
                 >
                     <TextareaAutosize
                         className="w-full resize-none border-0 bg-transparent py-2 pl-5 pr-14 
@@ -268,7 +268,7 @@ const CreateChat = () => {
                 </div>
             </form>
             <div ref={scrolled} className="overflow-auto">
-                {loading && <span className="loader bottom-1"></span>}
+                {loading && <span className="loader"></span>}
                 {chatResponses.length > 0 &&
                     chatResponses.map((answer) => (
                         <ChatResponse key={answer.key} response={answer} />

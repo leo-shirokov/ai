@@ -6,7 +6,7 @@ function Header() {
             <div className="h-full flex justify-between items-center">
                 <h1 className="text-zinc-200">
                     <a
-                        className="hover:no-underline hover:text-zinc-500 transition-all"
+                        className="hover:no-underline hover:text-zinc-500 transition-all pl-10"
                         href="/"
                     >
                         Avadakedavra Chat
