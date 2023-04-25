@@ -42,11 +42,21 @@ const CreateChat = () => {
     }, []);
 
     const setDefaultValues = () => {
+        setChecked(false);
         setVariability(variability);
         setTemperature(temperature);
         setPenalty(penalty);
-        setChecked(false);
         setTokens(tokens);
+    };
+
+    const openNewChat = () => {
+        setChatResponses([]);
+        setPrompt("");
+        setChecked(false);
+        setVariability(1);
+        setTemperature(0.7);
+        setPenalty(0);
+        setTokens(2048);
     };
 
     const sendMessage = async (e) => {
@@ -270,15 +280,15 @@ const CreateChat = () => {
                         bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-500 hover:ring-1 transition-all"
                         type="button"
                         onClick={() => {
-                            setChatResponses([]);
+                            openNewChat();
                         }}
                     >
                         New chat
                     </button>
                 </div>
             </form>
-            <div ref={scrolled} className="overflow-auto">
-                {loading && <span className="loader"></span>}
+            {loading && <span className="loader"></span>}
+            <div ref={scrolled} className="overflow-auto mt-4">
                 {chatResponses.length > 0 &&
                     chatResponses.map((answer) => (
                         <ChatResponse key={answer.key} response={answer} />

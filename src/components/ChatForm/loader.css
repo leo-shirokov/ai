@@ -2,17 +2,17 @@
     transform: rotateZ(45deg);
     perspective: 1000px;
     border-radius: 50%;
-    width: 46px;
-    height: 46px;
-    color: #1049bc;
+    width: 36px;
+    height: 36px;
+    color: #0d8214;
 }
 .loader:before,
 .loader:after {
     content: "";
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 6px;
     width: inherit;
     height: inherit;
     border-radius: 50%;
@@ -20,7 +20,7 @@
     animation: 1s spin linear infinite;
 }
 .loader:after {
-    color: #b1550f;
+    color: #8c1212;
     transform: rotateY(70deg);
     animation-delay: 0.4s;
 }
