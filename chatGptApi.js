@@ -25,30 +25,17 @@ export async function openAI(body = null) {
     if (!content) throw new Error("No response from Chat GPT");
     return content;
 }
-
-export async function openChatGpt({
-    prompt,
-    systemMessage,
-    variability,
-    temperature,
-    penalty,
-    tokens,
-}) {
-    const body = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            ...systemMessage,
+// Reasonable use of a class that forms an object based on the parameters received from the user
+export class RequestBody {
+    model = "gpt-3.5-turbo";
+    constructor(prompt, sysMsg, variability, temp, penalty, tokens) {
+        this.messages = [
+            ...sysMsg,
             { role: "user", content: prompt, name: "AvadakedavraOrg" },
-        ],
-        temperature: temperature,
-        stream: false,
-        top_p: 1,
-        n: variability,
-        stop: null,
-        max_tokens: tokens,
-        presence_penalty: penalty,
-        frequency_penalty: 0,
-    };
-    // console.log(body);
-    return openAI(body);
+        ];
+        this.n = variability;
+        this.temperature = temp;
+        this.presence_penalty = penalty;
+        this.max_tokens = tokens;
+    }
 }

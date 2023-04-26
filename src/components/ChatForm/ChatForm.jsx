@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { openChatGpt } from "../../../chatGptApi";
-import { BiSend } from "react-icons/bi";
+import { openAI, RequestBody } from "../../../chatGptApi";
 import { v4 as uuidv4 } from "uuid";
-import TextareaAutosize from "react-textarea-autosize";
 import ChatResponse from "../ChatResponse/ChatResponse";
+import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import "./loader.css";
 
 const systemMessage = {
@@ -24,7 +23,7 @@ const CreateChat = ({ settings }) => {
     const focus = useRef(null);
     const scrolled = useRef(null);
 
-    const onInsertNode = (event) => {
+    const onResponse = (event) => {
         const { currentTarget: target } = event;
         target.scroll({ top: target.scrollHeight, behavior: "smooth" });
         focus.current.blur();
@@ -34,12 +33,6 @@ const CreateChat = ({ settings }) => {
         if (e.code !== "Enter") return;
         sendMessage(e);
     };
-
-    useEffect(() => {
-        // if (scrolled)
-        scrolled.current.addEventListener("DOMNodeInserted", onInsertNode);
-        focus.current.focus();
-    }, []);
 
     const setDefaultValues = () => {
         setChecked(false);
@@ -70,14 +63,17 @@ const CreateChat = ({ settings }) => {
                 prompt,
             ].join("\n");
 
-            const response = await openChatGpt({
-                prompt: newQuestion,
-                systemMessage: checked ? [systemMessage] : [],
-                variability,
-                temperature,
-                penalty,
-                tokens,
-            });
+            const response = await openAI(
+                new RequestBody(
+                    newQuestion,
+                    checked ? [systemMessage] : [],
+                    variability,
+                    temperature,
+                    penalty,
+                    tokens
+                )
+            );
+
             setDefaultValues();
             setChatResponses((prev) => [
                 ...prev,
@@ -92,6 +88,12 @@ const CreateChat = ({ settings }) => {
         }
     };
 
+    useEffect(() => {
+        // if (scrolled)
+        scrolled.current.addEventListener("DOMNodeInserted", onResponse);
+        focus.current.focus();
+    }, []);
+
     return (
         <div className="w-full h-full flex flex-col">
             <form
@@ -99,29 +101,11 @@ const CreateChat = ({ settings }) => {
                 onKeyDown={handleKeyDown}
                 onSubmit={sendMessage}
             >
-                <div
-                    className="flex flex-col w-full relative border-transparent bg-zinc-700 text-md font-normal 
-                    rounded-md shadow-[0_0_15px_rgba(0,0,0,0.50)] ring-1 ring-zinc-900 text-zinc-300 mt-px mb-6 md:mt-0"
-                >
-                    <TextareaAutosize
-                        className="w-full resize-none border-0 bg-transparent py-2 pl-5 pr-14 
-                        caret-zinc-400 placeholder-zinc-500 focus:outline-none"
-                        ref={focus}
-                        type="text"
-                        minRows="1"
-                        maxRows="10"
-                        value={prompt}
-                        placeholder="Enter the text"
-                        onChange={(e) => setPrompt(e.target.value)}
-                    />
-                    <button
-                        className="absolute p-1 text-zinc-400 bottom-1.5 right-1 
-                        hover:text-zinc-900 transition-all md:right-2 md:bottom-2.5"
-                        type="submit"
-                    >
-                        <BiSend />
-                    </button>
-                </div>
+                <ChatTextarea
+                    setPrompt={setPrompt}
+                    prompt={prompt}
+                    focus={focus}
+                />
 
                 {settings && (
                     <div className="flex justify-center gap-x-10 items-center md:flex-col md:gap-y-5">
