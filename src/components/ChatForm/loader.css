@@ -4,15 +4,15 @@
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    color: #0d8214;
+    color: #c1e1c8;
 }
 .loader:before,
 .loader:after {
     content: "";
     display: block;
     position: absolute;
-    bottom: -5%;
-    left: 40%;
+    bottom: -15%;
+    right: 10px;
     width: inherit;
     height: inherit;
     border-radius: 50%;
@@ -20,7 +20,7 @@
     animation: 1s spin linear infinite;
 }
 .loader:after {
-    color: #8c1212;
+    color: #7b8992;
     transform: rotateY(70deg);
     animation-delay: 0.4s;
 }

@@ -1,12 +1,6 @@
-const netlifyUrl = "https://ai-backend.netlify.app/.netlify/functions/api";
-const aiUrl = "https://api.openai.com/v1/chat/completions";
+import getApiKey from "./src/components/GetApiKey/GetApiKey";
 
-async function getApiKey() {
-    const res = await fetch(netlifyUrl);
-    if (!res.ok) throw new Error("Cannot get API key from Netlify server");
-    const { api_key } = await res.json();
-    return api_key;
-}
+const aiUrl = "https://api.openai.com/v1/chat/completions";
 
 export async function openAI(body = null) {
     const headers = {
@@ -25,9 +19,11 @@ export async function openAI(body = null) {
     if (!content) throw new Error("No response from Chat GPT");
     return content;
 }
+
 // Reasonable use of a class that forms an object based on the parameters received from the user
 export class RequestBody {
     model = "gpt-3.5-turbo";
+    stream = false;
     constructor(prompt, sysMsg, variability, temp, penalty, tokens) {
         this.messages = [
             ...sysMsg,

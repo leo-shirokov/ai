@@ -12,7 +12,6 @@ const systemMessage = {
 
 const CreateChat = ({ settings }) => {
     const [loading, setLoading] = useState(false);
-    const [prompt, setPrompt] = useState("");
     const [checked, setChecked] = useState(false);
     const [variability, setVariability] = useState(1);
     const [temperature, setTemperature] = useState(0.7);
@@ -20,18 +19,11 @@ const CreateChat = ({ settings }) => {
     const [tokens, setTokens] = useState(2048);
     const [chatResponses, setChatResponses] = useState([]);
 
-    const focus = useRef(null);
     const scrolled = useRef(null);
 
     const onResponse = (event) => {
         const { currentTarget: target } = event;
         target.scroll({ top: target.scrollHeight, behavior: "smooth" });
-        focus.current.blur();
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.code !== "Enter") return;
-        sendMessage(e);
     };
 
     const setDefaultValues = () => {
@@ -42,9 +34,8 @@ const CreateChat = ({ settings }) => {
         setTokens(tokens);
     };
 
-    const openNewChat = () => {
+    const clearChat = () => {
         setChatResponses([]);
-        setPrompt("");
         setChecked(false);
         setVariability(1);
         setTemperature(0.7);
@@ -52,11 +43,9 @@ const CreateChat = ({ settings }) => {
         setTokens(2048);
     };
 
-    const sendMessage = async (e) => {
-        e.preventDefault();
+    const sendMessage = async (prompt) => {
         try {
             setLoading(true);
-            setPrompt("");
 
             const newQuestion = [
                 ...chatResponses.map((el) => el.message),
@@ -91,24 +80,15 @@ const CreateChat = ({ settings }) => {
     useEffect(() => {
         // if (scrolled)
         scrolled.current.addEventListener("DOMNodeInserted", onResponse);
-        focus.current.focus();
     }, []);
 
     return (
         <div className="w-full h-full flex flex-col">
-            <form
-                className="w-full"
-                onKeyDown={handleKeyDown}
-                onSubmit={sendMessage}
-            >
-                <ChatTextarea
-                    setPrompt={setPrompt}
-                    prompt={prompt}
-                    focus={focus}
-                />
+            <form className="w-full">
+                <ChatTextarea onSubmit={sendMessage} />
 
                 {settings && (
-                    <div className="flex justify-center gap-x-10 items-center md:flex-col md:gap-y-5">
+                    <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
                         <div className="flex justify-center items-center md:self-start">
                             <input
                                 className="uk-checkbox shadow-[0_0_15px_rgba(0,0,0,0.50)]"
@@ -246,38 +226,39 @@ const CreateChat = ({ settings }) => {
                                 Scale-2.
                             </span>
                             &nbsp; Variety: higher is more creative, lower is
-                            more deterministic (from 0.2 to 2)
+                            more deterministic (from 0.2 to 2, step 0.1)
                         </p>
                         <p>
                             <span className="text-zinc-900 font-bold">
                                 Scale-3.
                             </span>
                             &nbsp; Penalty: decreased likelihood of repeated
-                            responses in chat mode (from 0 to 1)
+                            responses in chat mode (from 0 to 1, step 0.1)
                         </p>
                         <p>
                             <span className="text-zinc-900 font-bold">
                                 Scale-4.
                             </span>
-                            &nbsp; Response length: the higher, the more
-                            complete the answer is (from 148 to 2048 tokens)
+                            &nbsp; Answer length: the higher, the more complete
+                            the answer (from 148 tokens to 2047, step 380
+                            tokens)
                         </p>
                     </div>
                     <button
-                        className="absolute right-3 text-md text-zinc-400 shadow-[0_0_15px_rgba(0,0,0,0.50)]
-                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-500 hover:ring-1 transition-all"
+                        className="absolute left-16 text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all md:text-sm"
                         type="button"
                         onClick={() => {
-                            openNewChat();
+                            clearChat();
                         }}
                     >
-                        New chat
+                        Clear chat
                     </button>
                     {loading && <span className="loader"></span>}
                 </div>
             </form>
-            {/* {loading && <div className="loader"></div>} */}
-            <div ref={scrolled} className="overflow-auto mt-4">
+
+            <div ref={scrolled} className="w-full overflow-auto mt-4">
                 {chatResponses.length > 0 &&
                     chatResponses.map((answer) => (
                         <ChatResponse key={answer.key} response={answer} />

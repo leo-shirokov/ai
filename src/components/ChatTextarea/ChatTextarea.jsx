@@ -1,7 +1,27 @@
+import { useState, useRef, useEffect } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { BiSend } from "react-icons/bi";
 
-function ChatTextarea({ setPrompt, prompt, focus }) {
+function ChatTextarea({ onSubmit }) {
+    const [prompt, setPrompt] = useState("");
+    const focus = useRef(null);
+
+    useEffect(() => {
+        focus.current.focus();
+    }, []);
+
+    const onClick = () => {
+        focus.current.blur();
+        setPrompt("");
+        onSubmit(prompt);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.code !== "Enter") return;
+        e.preventDefault();
+        onSubmit(prompt);
+    };
+
     return (
         <div
             className="flex flex-col w-full relative border-transparent bg-zinc-700 text-md font-normal 
@@ -17,11 +37,13 @@ function ChatTextarea({ setPrompt, prompt, focus }) {
                 value={prompt}
                 placeholder="Enter the text"
                 onChange={(e) => setPrompt(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
             <button
                 className="absolute p-1 text-zinc-400 bottom-1.5 right-1 
                         hover:text-zinc-900 transition-all md:right-2 md:bottom-2.5"
-                type="submit"
+                type="button"
+                onClick={onClick}
             >
                 <BiSend />
             </button>

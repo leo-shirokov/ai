@@ -2,6 +2,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ChatForm from "./components/ChatForm/ChatForm";
 import { useState } from "react";
+import ChatImage from "./components/ChatImage/ChatImage";
 
 function App() {
     const [settings, setSettings] = useState(true);
@@ -11,6 +12,7 @@ function App() {
             <Header setSettings={setSettings} />
             <div className="grow w-3/4 mx-auto bg-zinc-800 px-4 py-10 md:w-11/12 overflow-auto">
                 <ChatForm settings={settings} />
+                {/* <ChatImage /> */}
             </div>
             <Footer />
         </div>
