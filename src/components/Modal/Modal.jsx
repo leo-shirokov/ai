@@ -36,7 +36,9 @@ function Modal({ open, onClose, children }) {
 
                 {/* content */}
                 <div
-                    className={`fixed right-0 bottom-20 h-fit bg-zinc-800 text-md text-zinc-500 font-extralight shadow-lg w-11/12 p-6 rounded-md md:h-screen md:bottom-0 md:top-14 md:overflow-auto ${
+                    className={`fixed right-0 bottom-20 h-fit bg-zinc-800 text-md text-zinc-500 
+                    font-extralight shadow-lg w-fit p-6 rounded-md md:bottom-0 md:top-14 
+                    md:overflow-auto md:w-11/12 md:h-1/2 ${
                         open ? "opacity-100" : "pointer-events-none opacity-0"
                     } transition-opacity duration-300 ease-in-out`}
                 >

@@ -1,5 +1,3 @@
-// import { Modal, initTE } from "tw-elements";
-// initTE({ Modal });
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 

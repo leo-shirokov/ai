@@ -19,6 +19,7 @@ function ChatTextarea({ onSubmit }) {
     const handleKeyDown = (e) => {
         if (e.code !== "Enter") return;
         e.preventDefault();
+        setPrompt("");
         onSubmit(prompt);
     };
 
