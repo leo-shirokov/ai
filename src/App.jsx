@@ -1,17 +1,16 @@
+import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import ChatForm from "./components/ChatForm/ChatForm";
-import { useState } from "react";
 import ChatImage from "./components/ChatImage/ChatImage";
 
 function App() {
-    const [settings, setSettings] = useState(true);
-
     return (
         <div className="w-full h-screen bg-zinc-800 flex flex-col">
-            <Header setSettings={setSettings} />
+            <Header />
             <div className="grow w-3/4 mx-auto bg-zinc-800 px-4 py-10 md:w-11/12 overflow-auto">
-                <ChatForm settings={settings} />
+                <ChatForm />
                 {/* <ChatImage /> */}
             </div>
             <Footer />

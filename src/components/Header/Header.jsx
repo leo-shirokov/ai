@@ -1,7 +1,7 @@
-import { GiSettingsKnobs } from "react-icons/gi";
+import { IoMdImages } from "react-icons/io";
 import logo from "./logo.png";
 
-function Header({ setSettings }) {
+function Header() {
     return (
         <div className="w-full h-14 bg-zinc-950 px-5 shrink-0">
             <div className="h-full flex justify-between items-center">
@@ -10,14 +10,15 @@ function Header({ setSettings }) {
                         className="hover:no-underline hover:text-zinc-500 transition-all"
                         href="/"
                     >
-                        Avadakedavra Chat
+                        Avadakedavra chat
                     </a>
                 </h1>
+                <div></div>
                 <button
-                    onClick={() => setSettings((prev) => !prev)}
-                    className="2xl:hidden xl:hidden lg:hidden md:block sm:block"
+                    // onClick={() => setImage((prev) => !prev)}
+                    className=""
                 >
-                    <GiSettingsKnobs className="text-xl" />
+                    <IoMdImages className="text-2xl text-zinc-300" />
                 </button>
                 <img className="h-8" src={logo} />
             </div>

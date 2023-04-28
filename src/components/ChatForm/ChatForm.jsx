@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { openAI, RequestBody } from "../../../chatGptApi";
 import { v4 as uuidv4 } from "uuid";
+import { GiSettingsKnobs } from "react-icons/gi";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import "./loader.css";
@@ -10,7 +11,7 @@ const systemMessage = {
     content: "You are a helpful assistant",
 };
 
-const CreateChat = ({ settings }) => {
+const CreateChat = () => {
     const [loading, setLoading] = useState(false);
     const [checked, setChecked] = useState(false);
     const [variability, setVariability] = useState(1);
@@ -18,6 +19,8 @@ const CreateChat = ({ settings }) => {
     const [penalty, setPenalty] = useState(0);
     const [tokens, setTokens] = useState(2048);
     const [chatResponses, setChatResponses] = useState([]);
+
+    const [tune, setTune] = useState(true);
 
     const scrolled = useRef(null);
 
@@ -78,7 +81,6 @@ const CreateChat = ({ settings }) => {
     };
 
     useEffect(() => {
-        // if (scrolled)
         scrolled.current.addEventListener("DOMNodeInserted", onResponse);
     }, []);
 
@@ -87,7 +89,7 @@ const CreateChat = ({ settings }) => {
             <form className="w-full">
                 <ChatTextarea onSubmit={sendMessage} />
 
-                {settings && (
+                {tune && (
                     <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
                         <div className="flex justify-center items-center md:self-start">
                             <input
@@ -195,12 +197,12 @@ const CreateChat = ({ settings }) => {
                     </div>
                 )}
                 <div className="invisible">Open settings</div>
-                <div className="relative">
+                <div className="relative flex justify-start gap-x-10">
                     <a
                         href="#toggle-animation"
                         uk-icon="icon: info; ratio: 1"
-                        className="stroke-zinc-600"
                         uk-toggle="target: #toggle-animation; animation: uk-animation-fade"
+                        className="stroke-zinc-600 pt-1"
                     ></a>
                     <div
                         id="toggle-animation"
@@ -245,8 +247,18 @@ const CreateChat = ({ settings }) => {
                         </p>
                     </div>
                     <button
-                        className="absolute left-16 text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
-                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all md:text-sm"
+                        type="button"
+                        onClick={() => {
+                            console.log("tune");
+                            setTune((prev) => !prev);
+                        }}
+                        className="left-10 2xl:hidden xl:hidden lg:hidden md:block sm:block"
+                    >
+                        <GiSettingsKnobs className="text-2xl" />
+                    </button>
+                    <button
+                        className="left-16 text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                         type="button"
                         onClick={() => {
                             clearChat();
