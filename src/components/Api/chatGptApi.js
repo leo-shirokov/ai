@@ -1,11 +1,11 @@
-import getApiKey from "./src/components/GetApiKey/GetApiKey";
+import GetApiKey from "./GetApiKey";
 
 const aiUrl = "https://api.openai.com/v1/chat/completions";
 
 export async function openAI(body = null) {
     const headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${await getApiKey()}`,
+        Authorization: `Bearer ${await GetApiKey()}`,
     };
     const res = await fetch(aiUrl, {
         method: "POST",

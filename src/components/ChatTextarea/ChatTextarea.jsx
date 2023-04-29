@@ -30,13 +30,13 @@ function ChatTextarea({ onSubmit }) {
         >
             <TextareaAutosize
                 className="w-full resize-none border-0 bg-transparent py-2 pl-5 pr-14 
-                        caret-zinc-400 placeholder-zinc-500 focus:outline-none"
+                        caret-zinc-200 placeholder-zinc-500 focus:outline-none"
                 ref={focus}
                 type="text"
                 minRows="1"
                 maxRows="10"
                 value={prompt}
-                placeholder="Enter the text"
+                placeholder="Enter prompt"
                 onChange={(e) => setPrompt(e.target.value)}
                 onKeyDown={handleKeyDown}
             />

@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { openAI, RequestBody } from "../../../chatGptApi";
+import { openAI, RequestBody } from "../Api/chatGptApi";
 import { v4 as uuidv4 } from "uuid";
 import { GiSettingsKnobs } from "react-icons/gi";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
-import "./loader.css";
 
 const systemMessage = {
     role: "system",
@@ -19,8 +18,7 @@ const CreateChat = () => {
     const [penalty, setPenalty] = useState(0);
     const [tokens, setTokens] = useState(2048);
     const [chatResponses, setChatResponses] = useState([]);
-
-    const [tune, setTune] = useState(true);
+    const [chatSettings, setChatSettings] = useState(true);
 
     const scrolled = useRef(null);
 
@@ -89,16 +87,16 @@ const CreateChat = () => {
             <form className="w-full">
                 <ChatTextarea onSubmit={sendMessage} />
 
-                {tune && (
+                {chatSettings && (
                     <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
                         <div className="flex justify-center items-center md:self-start">
                             <input
-                                className="uk-checkbox shadow-[0_0_15px_rgba(0,0,0,0.50)]"
+                                className="relative float-left h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] shadow-[0_0_15px_rgba(0,0,0,0.50)]"
                                 type="checkbox"
                                 checked={checked}
                                 onChange={(e) => setChecked(e.target.checked)}
                             />
-                            <p className="hidden text-sm pl-2 md:block">
+                            <p className="hidden text-xs pl-4 md:block">
                                 Mark once to start a chat conversation
                             </p>
                         </div>
@@ -197,7 +195,7 @@ const CreateChat = () => {
                     </div>
                 )}
                 <div className="invisible">Open settings</div>
-                <div className="relative flex justify-start gap-x-10">
+                <div className="h-8 flex justify-start items-center gap-x-10">
                     <a
                         href="#toggle-animation"
                         uk-icon="icon: info; ratio: 1"
@@ -208,7 +206,7 @@ const CreateChat = () => {
                         id="toggle-animation"
                         uk-drop="mode: click"
                         className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
-                    bg-zinc-700 rounded-md text-zinc-400 p-5"
+                    bg-zinc-700 rounded-md text-zinc-400 text-sm p-4"
                     >
                         <p className="md:hidden">
                             <span className="text-zinc-900 font-bold">
@@ -249,15 +247,14 @@ const CreateChat = () => {
                     <button
                         type="button"
                         onClick={() => {
-                            console.log("tune");
-                            setTune((prev) => !prev);
+                            setChatSettings((prev) => !prev);
                         }}
-                        className="left-10 2xl:hidden xl:hidden lg:hidden md:block sm:block"
+                        className="2xl:hidden xl:hidden lg:hidden md:block sm:block"
                     >
                         <GiSettingsKnobs className="text-2xl" />
                     </button>
                     <button
-                        className="left-16 text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                        className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
                         bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                         type="button"
                         onClick={() => {
@@ -266,11 +263,20 @@ const CreateChat = () => {
                     >
                         Clear chat
                     </button>
-                    {loading && <span className="loader"></span>}
+                    {loading && (
+                        <div
+                            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                            role="status"
+                        >
+                            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                                Loading...
+                            </span>
+                        </div>
+                    )}
                 </div>
             </form>
 
-            <div ref={scrolled} className="w-full overflow-auto mt-4">
+            <div ref={scrolled} className="w-full overflow-y-auto mt-4">
                 {chatResponses.length > 0 &&
                     chatResponses.map((answer) => (
                         <ChatResponse key={answer.key} response={answer} />

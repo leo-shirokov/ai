@@ -1,6 +1,8 @@
-// Beta version API
+API DALL·E is in beta mode, download image via GET request is not implemented. 
+The commented code will provide this option as soon as the API functionality allows it.
+
 import { useState } from "react";
-import GetApiKey from "../GetApiKey/GetApiKey";
+import GetApiKey from "../Api/GetApiKey";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import Modal from "../Modal/Modal";
 import "./loader.css";
@@ -36,7 +38,7 @@ const getApiContent = async (body = null) => {
 //     return res;
 // };
 
-function ChatImage() {
+function ImageForm() {
     const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(false);
     const [activeImage, setActiveImage] = useState("");
@@ -81,7 +83,7 @@ function ChatImage() {
                                 <img
                                     src={image}
                                     alt={"AI generated image"}
-                                    className="border border-zinc-900 shadow-xl rounded-md"
+                                    className="border border-zinc-900 shadow-xl rounded-md transition duration-300 ease-in-out hover:scale-110"
                                 />
                             </div>
                         </div>
@@ -91,7 +93,7 @@ function ChatImage() {
                         <img
                             src={activeImage}
                             alt={"AI generated image"}
-                            className="w-[40rem] border border-zinc-900 shadow-xl rounded-md"
+                            className="w-[40rem] border border-zinc-900 rounded-md transition duration-300 ease-in-out hover:shadow-lg dark:hover:shadow-black/30"
                         />
                     </a>
                     {/* <button onClick={() => downloadImage(fileName)}>
@@ -103,4 +105,4 @@ function ChatImage() {
     );
 }
 
-export default ChatImage;
+export default ImageForm;
