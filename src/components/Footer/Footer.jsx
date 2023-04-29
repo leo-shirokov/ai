@@ -30,17 +30,16 @@ function Footer() {
                     <br />
                     <span className="text-zinc-400">GPT-3.5 MODEL</span>
                     <br />
-                    The app uses the ChatGPT Language Model OpenAI API to
-                    generate text. The API key for authorization is stored on
-                    the server. The language model has limited knowledge about
-                    the world and events after 2021. <br />
+                    The application uses the ChatGPT Language Model OpenAI API
+                    to generate text. The language model has limited knowledge
+                    about the world and events after 2021. <br />
                     Based on the prompt entered by the user, the model generates
                     a text completion (text completion) that tries to match the
                     context that was given to it by the user. By default, the
-                    app is set to use the language model immediately in both
-                    single question and chat mode. However, it is recommended
-                    that you read the information on fine-tuning the model using
-                    the four scale ranges provided by clicking the{" "}
+                    application is set to use the language model immediately in
+                    both single question and chat mode. However, it is
+                    recommended that you read the information on fine-tuning the
+                    model using the four scale ranges provided by clicking the{" "}
                     <span className="text-md text-red-500">i</span> icon on the
                     main page. <br />
                     For the model to work in chat mode, it is recommended to

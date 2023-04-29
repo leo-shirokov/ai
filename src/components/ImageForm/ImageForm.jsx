@@ -3,7 +3,6 @@ import { useState } from "react";
 import GetApiKey from "../Api/GetApiKey";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import Modal from "../Modal/Modal";
-import "./loader.css";
 
 const aiUrl = "https://api.openai.com/v1/images/generations";
 
@@ -49,14 +48,26 @@ function ImageForm() {
     return (
         <div className="w-full h-full">
             <ChatTextarea onSubmit={onSubmitForm} />
-            <button
-                className="px-3 py-1 bg-zinc-700 rounded-md shadow-[0_0_15px_rgba(0,0,0,0.30)] text-md text-zinc-500 hover:text-zinc-600 transition-all mb-5 ml-4 md:ml-0"
-                onClick={() => setContent([])}
-            >
-                Clear
-            </button>
-            <div>{loading && <span className="loader"></span>}</div>
-            <div className="grid grid-cols-2 grid-rows-2 gap-5 w-full md:grid-cols-none md:grid-rows-2 pb-20">
+            <div className="flex flex-start gap-x-16">
+                <button
+                    className="px-3 py-1 bg-zinc-700 rounded-md shadow-[0_0_15px_rgba(0,0,0,0.30)] text-md text-zinc-500
+                hover:text-zinc-600 transition-all mb-5 ml-4 md:ml-0"
+                    onClick={() => setContent([])}
+                >
+                    Clear
+                </button>
+                {loading && (
+                    <div
+                        className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status"
+                    >
+                        <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                            Loading...
+                        </span>
+                    </div>
+                )}
+            </div>
+            <div className="grid grid-cols-2 grid-rows-2 gap-5 w-full overflow-y-auto md:grid-cols-none md:grid-rows-2 pb-20">
                 {content.length > 0 &&
                     content.map((image) => (
                         <div key={image} className="w-80 mx-auto">
