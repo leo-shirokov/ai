@@ -1,9 +1,10 @@
 import { IoMdImages } from "react-icons/io";
 import { HiChatAlt2 } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "./logo.png";
 
 function Header() {
+    const location = useLocation();
     return (
         <div className="w-full h-14 bg-zinc-950 px-5 shrink-0">
             <div className="h-full flex justify-between items-center">
@@ -19,12 +20,16 @@ function Header() {
                     </h1>
                 </div>
                 <div className="flex justify-center gap-x-7">
-                    <Link to="/ai">
-                        <HiChatAlt2 className="text-2xl text-zinc-400 hover:text-zinc-100" />
-                    </Link>
-                    <Link to="/image">
-                        <IoMdImages className="text-2xl text-zinc-400 hover:text-zinc-100" />
-                    </Link>
+                    {location.pathname === "/image" && (
+                        <Link to="/ai">
+                            <HiChatAlt2 className="text-2xl text-zinc-400 hover:text-zinc-100" />
+                        </Link>
+                    )}
+                    {location.pathname === "/ai" && (
+                        <Link to="/image">
+                            <IoMdImages className="text-2xl text-zinc-400 hover:text-zinc-100" />
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>
