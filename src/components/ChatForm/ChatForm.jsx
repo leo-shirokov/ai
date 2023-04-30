@@ -206,7 +206,7 @@ const CreateChat = () => {
                         id="toggle-animation"
                         uk-drop="mode: click"
                         className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
-                    bg-zinc-700 rounded-md text-zinc-400 text-sm p-4"
+                    bg-zinc-700 rounded-md text-zinc-400 text-sm p-4 border border-zinc-900"
                     >
                         <p className="md:hidden">
                             <span className="text-zinc-900 font-bold">

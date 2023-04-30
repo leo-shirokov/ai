@@ -8,7 +8,11 @@ function Header() {
         <div className="w-full h-14 bg-zinc-950 px-5 shrink-0">
             <div className="h-full flex justify-between items-center">
                 <div className="flex justify-center items-center gap-5">
-                    <img className="h-8" src={logo} />
+                    <img
+                        onClick={() => location.reload()}
+                        className="h-8"
+                        src={logo}
+                    />
                     <h1 className="text-zinc-300">
                         <Link
                             to="/ai"

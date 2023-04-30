@@ -48,13 +48,24 @@ function ImageForm() {
     return (
         <div className="w-full h-full">
             <ChatTextarea onSubmit={onSubmitForm} />
+            <details className="pb-5">
+                <summary className="text-sm text-zinc-600 hover:text-zinc-500">
+                    Loading problems
+                </summary>
+                <p className="text-sm pt-2">
+                    During peak hours on the OPEN AI server, the image
+                    generation time may increase, however, if the download does
+                    not occur after more than 40 seconds, click on the logo to
+                    reload the page and enter the prompt again.
+                </p>
+            </details>
             <div className="flex flex-start gap-x-16">
                 <button
                     className="px-3 py-1 bg-zinc-700 rounded-md shadow-[0_0_15px_rgba(0,0,0,0.30)] text-md text-zinc-500
                 hover:text-zinc-600 transition-all mb-5 ml-4 md:ml-0"
                     onClick={() => setContent([])}
                 >
-                    Clear
+                    Clear results
                 </button>
                 {loading && (
                     <div
@@ -67,6 +78,7 @@ function ImageForm() {
                     </div>
                 )}
             </div>
+
             <div className="grid grid-cols-2 grid-rows-2 gap-5 w-full overflow-y-auto md:grid-cols-none md:grid-rows-2 pb-20">
                 {content.length > 0 &&
                     content.map((image) => (
