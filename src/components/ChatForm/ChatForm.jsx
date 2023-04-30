@@ -96,13 +96,13 @@ const CreateChat = () => {
                                 checked={checked}
                                 onChange={(e) => setChecked(e.target.checked)}
                             />
-                            <p className="hidden text-xs pl-4 md:block">
+                            <p className="hidden text-xs text-zinc-400 pl-4 md:block">
                                 Mark once to start a chat conversation
                             </p>
                         </div>
                         <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-6">
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
-                                <div className="w-full flex justify-between items-center text-xs">
+                                <div className="w-full flex justify-between items-center text-xs text-zinc-400">
                                     <p>1</p>
                                     <p>2</p>
                                     <p>3</p>
@@ -122,7 +122,7 @@ const CreateChat = () => {
                                 />
                             </div>
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
-                                <div className="w-full flex justify-between items-center text-xs">
+                                <div className="w-full flex justify-between items-center text-xs text-zinc-400">
                                     <p>0.2</p>
                                     <p>0.4</p>
                                     <p>0.6</p>
@@ -150,7 +150,7 @@ const CreateChat = () => {
                         </div>
                         <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-6">
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
-                                <div className="w-full flex justify-between items-center text-xs">
+                                <div className="w-full flex justify-between items-center text-xs text-zinc-400">
                                     <p>0</p>
                                     <p>0.2</p>
                                     <p>0.4</p>
@@ -172,7 +172,7 @@ const CreateChat = () => {
                                 />
                             </div>
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
-                                <div className="w-full flex justify-between items-center text-xs">
+                                <div className="w-full flex justify-between items-center text-xs text-zinc-400">
                                     <p>148</p>
                                     <p>528</p>
                                     <p>908</p>
@@ -251,7 +251,7 @@ const CreateChat = () => {
                         }}
                         className="2xl:hidden xl:hidden lg:hidden md:block sm:block"
                     >
-                        <GiSettingsKnobs className="text-2xl" />
+                        <GiSettingsKnobs className="text-2xl text-zinc-300 focus:text-zinc-500" />
                     </button>
                     <button
                         className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]

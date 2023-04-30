@@ -5,20 +5,20 @@ import logo from "./logo.png";
 
 function Header() {
     return (
-        <div className="w-full h-14 bg-zinc-950 px-5 shrink-0">
+        <div className="w-full h-14 bg-zinc-950 px-10 shrink-0 md:px-5">
             <div className="h-full flex justify-between items-center">
-                <div className="flex justify-center items-center gap-5">
+                <div className="flex justify-center items-center gap-5 hover:cursor-pointer">
                     <img
                         onClick={() => location.reload()}
                         className="h-8"
                         src={logo}
                     />
-                    <h1 className="text-zinc-300">
+                    <h1 className="text-zinc-300 text-md">
                         <Link
                             to="/ai"
-                            className="hover:no-underline hover:text-zinc-400 transition-all"
+                            className="hover:no-underline hover:text-zinc-500 transition-all md:text-sm xs:text-xs"
                         >
-                            Avadakedavra chat
+                            Avadakedavra WizardChat
                         </Link>
                     </h1>
                 </div>

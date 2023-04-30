@@ -9,19 +9,19 @@ function Footer() {
             <div>
                 <a
                     href="mailto:post@avadakedavra.org"
-                    className="text-zinc-600 text-xs hover:no-underline hover:text-zinc-400"
+                    className="text-zinc-500 text-xs hover:no-underline hover:text-zinc-300"
                 >
                     © L.Shirokov
                 </a>
                 &nbsp;
-                <span className="text-zinc-600 text-xs">
+                <span className="text-zinc-500 text-xs">
                     {new Date().getFullYear()}
                 </span>
             </div>
             <div></div>
             <button
                 onClick={() => setOpen(true)}
-                className="text-sm text-zinc-500 hover:text-zinc-400 transition-all"
+                className="text-sm text-zinc-500 hover:text-zinc-300 transition-all"
             >
                 How it works
             </button>
