@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { openAI, RequestBody } from "../Api/chatGptApi";
 import { v4 as uuidv4 } from "uuid";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { GiInfo } from "react-icons/gi";
 import { GoSettings } from "react-icons/go";
+import { openAI, RequestBody } from "../Api/chatGptApi";
+import { rolesOptions } from "./rolesOptions";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import Modal from "../Modal/Modal";
-import { rolesOptions } from "./rolesOptions";
 
 const CreateChat = () => {
     const [loading, setLoading] = useState(false);
@@ -94,7 +94,7 @@ const CreateChat = () => {
                 {chatSettings && (
                     <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
                         <select
-                            className="w-1/4 h-7 bg-zinc-600 text-sm text-zinc-300 rounded-md p-1 shadow-[0_0_15px_rgba(0,0,0,0.50)] 
+                            className="w-1/4 h-7 bg-zinc-600 text-sm text-zinc-300 font-extralight rounded-md p-1 shadow-[0_0_15px_rgba(0,0,0,0.50)] 
                             hover:ring-1 hover:ring-zinc-400 transition-all focus:outline-none xl:w-1/3 lg:w-4/5 md:w-11/12"
                             onChange={(e) => setRoleIndex(e.target.value)}
                             value={roleIndex}

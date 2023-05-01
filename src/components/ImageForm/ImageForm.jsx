@@ -28,6 +28,31 @@ function ImageForm() {
     const [loading, setLoading] = useState(false);
     const [activeImage, setActiveImage] = useState("");
 
+    const surprises = [
+        "ship at sea",
+        "orange kitten",
+        "milky way",
+        "purple flower",
+        "white piano",
+        "quantum computer",
+        "spaceship",
+        "bright red heart",
+        "scrambled eggs in a frying pan",
+        "gold coins",
+        "sunset over the sea",
+        "sunset in the desert",
+        "sunset on Mars",
+        "jungi",
+        "ant",
+        "books",
+        "barometer",
+        "bitcoin",
+        "puppy",
+        "moon landscape",
+    ];
+    const randomSurprise = Math.floor(Math.random() * (surprises.length - 1));
+    const surprise = surprises[randomSurprise];
+
     const onSubmitForm = async (newValue) => {
         try {
             setLoading(true);
@@ -61,13 +86,20 @@ function ImageForm() {
                     and enter the prompt again.
                 </p>
             </details>
-            <div className="flex flex-start gap-x-16">
+            <div className="flex flex-start gap-x-16 mb-10">
                 <button
                     className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
                     bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                     onClick={() => setContent([])}
                 >
                     Clear results
+                </button>
+                <button
+                    className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                    bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
+                    onClick={() => onSubmitForm(surprise)}
+                >
+                    Surprise me
                 </button>
                 {loading && (
                     <div
