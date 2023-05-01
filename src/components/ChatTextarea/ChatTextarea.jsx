@@ -42,7 +42,7 @@ function ChatTextarea({ onSubmit }) {
                 onKeyDown={handleKeyDown}
             />
             <button
-                className="absolute p-1 text-zinc-400 bottom-1.5 right-1 
+                className="absolute p-1 text-zinc-300 bottom-1.5 right-1 
                         hover:text-zinc-900 transition-all md:right-2 md:bottom-2.5"
                 type="button"
                 onClick={onClick}

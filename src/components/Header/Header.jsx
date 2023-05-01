@@ -15,15 +15,15 @@ function Header() {
                     />
                     <h1 className="text-zinc-300 text-md">
                         <Link
-                            to="/ai"
+                            to="/"
                             className="hover:no-underline hover:text-zinc-500 transition-all md:text-sm xs:text-xs"
                         >
-                            Avadakedavra WizardChat
+                            WizardNeuralChat
                         </Link>
                     </h1>
                 </div>
                 <div className="flex justify-center gap-x-7">
-                    <Link to="/ai">
+                    <Link to="/">
                         <HiChatAlt2 className="text-2xl text-zinc-400 hover:text-zinc-100" />
                     </Link>
                     <Link to="/image">

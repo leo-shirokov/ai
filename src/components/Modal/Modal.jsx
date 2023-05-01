@@ -38,7 +38,7 @@ function Modal({ open, onClose, children }) {
                 <div
                     className={`fixed right-0 bottom-20 h-fit bg-zinc-800 text-md text-zinc-500 
                     font-extralight shadow-lg w-fit px-6 py-8 rounded-md md:bottom-0 md:top-14 
-                    md:overflow-auto md:w-11/12 md:h-full ${
+                    md:overflow-auto md:w-full md:h-3/4 ${
                         open ? "opacity-100" : "pointer-events-none opacity-0"
                     } transition-opacity duration-300 ease-in-out`}
                 >

@@ -10,7 +10,7 @@ function App() {
             <Header />
             <div className="grow w-3/4 h-full mx-auto bg-zinc-800 px-4 py-10 md:w-11/12 overflow-y-auto">
                 <Routes>
-                    <Route path="/ai" element={<ChatForm />} />
+                    <Route index element={<ChatForm />} />
                     <Route path="/image" element={<ImageForm />} />
                 </Routes>
             </div>

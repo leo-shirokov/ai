@@ -50,19 +50,19 @@ function ImageForm() {
             <ChatTextarea onSubmit={onSubmitForm} />
             <details className="pb-5">
                 <summary className="text-sm text-zinc-600 hover:text-zinc-500">
-                    Loading problems
+                    Resolve problems
                 </summary>
                 <p className="text-sm pt-2">
                     During peak hours on the OPEN AI server, the image
                     generation time may increase, however, if the download does
-                    not occur after more than 40 seconds, click on the logo to
-                    reload the page and enter the prompt again.
+                    not occur after more than 40 seconds, click on the website
+                    logo to reload the page and enter the prompt again.
                 </p>
             </details>
             <div className="flex flex-start gap-x-16">
                 <button
-                    className="px-3 py-1 bg-zinc-700 rounded-md shadow-[0_0_15px_rgba(0,0,0,0.30)] text-md text-zinc-500
-                hover:text-zinc-600 transition-all mb-5 ml-4 md:ml-0"
+                    className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                    bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                     onClick={() => setContent([])}
                 >
                     Clear results

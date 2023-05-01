@@ -91,10 +91,33 @@ const CreateChat = () => {
                     <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
                         <div className="flex justify-center items-center md:self-start">
                             <input
-                                className="relative float-left h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] shadow-[0_0_15px_rgba(0,0,0,0.50)]"
+                                className="relative float-left h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] 
+                                border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none 
+                                before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full 
+                                before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] 
+                                before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] 
+                                checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block 
+                                checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 
+                                checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 
+                                checked:after:border-solid checked:after:border-white checked:after:bg-transparent 
+                                checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] 
+                                hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none 
+                                focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] 
+                                focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] 
+                                focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] 
+                                focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] 
+                                checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] 
+                                checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px 
+                                checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] 
+                                checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] 
+                                checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid 
+                                checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 
+                                dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] 
+                                dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] shadow-[0_0_15px_rgba(0,0,0,0.50)]"
                                 type="checkbox"
                                 checked={checked}
                                 onChange={(e) => setChecked(e.target.checked)}
+                                title="Check once for chat mode"
                             />
                             <p className="hidden text-xs text-zinc-400 pl-4 md:block">
                                 Mark once to start a chat conversation
@@ -115,7 +138,6 @@ const CreateChat = () => {
                                     min="1"
                                     max="5"
                                     value={variability}
-                                    placeholder="0"
                                     onChange={(e) =>
                                         setVariability(+e.target.value)
                                     }
@@ -141,7 +163,6 @@ const CreateChat = () => {
                                     min="0.2"
                                     max="2"
                                     value={temperature}
-                                    placeholder="0"
                                     onChange={(e) =>
                                         setTemperature(+e.target.value)
                                     }
@@ -165,7 +186,6 @@ const CreateChat = () => {
                                     min="0"
                                     max="1"
                                     value={penalty}
-                                    placeholder="0"
                                     onChange={(e) =>
                                         setPenalty(+e.target.value)
                                     }
@@ -173,21 +193,20 @@ const CreateChat = () => {
                             </div>
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
                                 <div className="w-full flex justify-between items-center text-xs text-zinc-400">
-                                    <p>148</p>
-                                    <p>528</p>
-                                    <p>908</p>
-                                    <p>1288</p>
-                                    <p>1668</p>
-                                    <p>2048</p>
+                                    <p>100</p>
+                                    <p>500</p>
+                                    <p>900</p>
+                                    <p>1300</p>
+                                    <p>1700</p>
+                                    <p>2100</p>
                                 </div>
                                 <input
                                     className="uk-range w-full shadow-[0_0_15px_rgba(0,0,0,0.50)]"
                                     type="range"
-                                    step="380"
-                                    min="148"
-                                    max="2048"
+                                    step="400"
+                                    min="100"
+                                    max="2100"
                                     value={tokens}
-                                    placeholder="0"
                                     onChange={(e) => setTokens(+e.target.value)}
                                 />
                             </div>
@@ -206,8 +225,14 @@ const CreateChat = () => {
                         id="toggle-animation"
                         uk-drop="mode: click"
                         className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
-                    bg-zinc-700 rounded-md text-zinc-400 text-sm p-4 border border-zinc-900"
+                    bg-zinc-700 rounded-md text-zinc-400 text-sm font-extralight p-4 border border-zinc-900"
                     >
+                        <p className="italic">
+                            The <span className="font-bold">prompt</span> can be
+                            entered in any language.&nbsp;
+                            <span className="font-bold">Clear chat</span> every
+                            time when you change conversation topic.
+                        </p>
                         <p className="md:hidden">
                             <span className="text-zinc-900 font-bold">
                                 Checkbox:
@@ -240,7 +265,7 @@ const CreateChat = () => {
                                 Scale-4.
                             </span>
                             &nbsp; Answer length: the higher, the more complete
-                            the answer (from 148 tokens to 2047, step 380
+                            the answer (from 100 tokens to 2100, step 400
                             tokens)
                         </p>
                     </div>
@@ -256,6 +281,7 @@ const CreateChat = () => {
                     <button
                         className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
                         bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
+                        title="Clear chat history and reset settings"
                         type="button"
                         onClick={() => {
                             clearChat();
