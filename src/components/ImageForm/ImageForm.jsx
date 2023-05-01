@@ -49,7 +49,7 @@ function ImageForm() {
         <div className="w-full h-full">
             <ChatTextarea onSubmit={onSubmitForm} />
             <details className="pb-5">
-                <summary className="text-sm text-zinc-600 hover:text-zinc-500">
+                <summary className="text-sm text-zinc-600 hover:text-zinc-500 cursor-pointer">
                     Resolve problems
                 </summary>
                 <p className="text-sm pt-2">

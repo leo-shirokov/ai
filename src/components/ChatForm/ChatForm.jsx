@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { openAI, RequestBody } from "../Api/chatGptApi";
 import { v4 as uuidv4 } from "uuid";
 import { GiSettingsKnobs } from "react-icons/gi";
-import ChatResponse from "../ChatResponse/ChatResponse";
+import { GiInfo } from "react-icons/gi";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
+import ChatResponse from "../ChatResponse/ChatResponse";
+import Modal from "../Modal/Modal";
 
 const systemMessage = {
     role: "system",
@@ -19,6 +21,8 @@ const CreateChat = () => {
     const [tokens, setTokens] = useState(2048);
     const [chatResponses, setChatResponses] = useState([]);
     const [chatSettings, setChatSettings] = useState(true);
+
+    const [open, setOpen] = useState(false);
 
     const scrolled = useRef(null);
 
@@ -213,62 +217,67 @@ const CreateChat = () => {
                         </div>
                     </div>
                 )}
+
                 <div className="invisible">Open settings</div>
+
                 <div className="h-8 flex justify-start items-center gap-x-10">
-                    <a
-                        href="#toggle-animation"
-                        uk-icon="icon: info; ratio: 1"
-                        uk-toggle="target: #toggle-animation; animation: uk-animation-fade"
-                        className="stroke-zinc-600 pt-1"
-                    ></a>
-                    <div
-                        id="toggle-animation"
-                        uk-drop="mode: click"
-                        className="uk-card uk-card-default uk-card-body uk-width-large uk-margin-small
-                    bg-zinc-700 rounded-md text-zinc-400 text-sm font-extralight p-4 border border-zinc-900"
+                    <button
+                        type="button"
+                        onClick={() => setOpen(true)}
+                        className="text-xl text-zinc-400 hover:text-zinc-300 transition-all"
                     >
-                        <p className="italic">
-                            The <span className="font-bold">prompt</span> can be
-                            entered in any language.&nbsp;
-                            <span className="font-bold">Clear chat</span> every
-                            time when you change conversation topic.
-                        </p>
-                        <p className="md:hidden">
-                            <span className="text-zinc-900 font-bold">
-                                Checkbox:
-                            </span>
-                            &nbsp; check once to start chat mode conversation
-                        </p>
-                        <p>
-                            <span className="text-zinc-900 font-bold">
-                                Scale-1.
-                            </span>
-                            &nbsp;Variability: number of answer options (from 1
-                            to 5)
-                        </p>
-                        <p>
-                            <span className="text-zinc-900 font-bold">
-                                Scale-2.
-                            </span>
-                            &nbsp; Variety: higher is more creative, lower is
-                            more deterministic (from 0.2 to 2, step 0.1)
-                        </p>
-                        <p>
-                            <span className="text-zinc-900 font-bold">
-                                Scale-3.
-                            </span>
-                            &nbsp; Penalty: decreased likelihood of repeated
-                            responses in chat mode (from 0 to 1, step 0.1)
-                        </p>
-                        <p>
-                            <span className="text-zinc-900 font-bold">
-                                Scale-4.
-                            </span>
-                            &nbsp; Answer length: the higher, the more complete
-                            the answer (from 100 tokens to 2100, step 400
-                            tokens)
-                        </p>
-                    </div>
+                        <GiInfo />
+                    </button>
+                    <Modal open={open} onClose={() => setOpen(false)}>
+                        <div className="text-zinc-400 text-md font-extralight leading-9">
+                            <p className="italic">
+                                The <span className="font-bold">prompt</span>{" "}
+                                can be entered in any language.&nbsp;
+                                <span className="font-bold">
+                                    Clear chat
+                                </span>{" "}
+                                every time when you change conversation topic.
+                            </p>
+                            <br />
+                            <p className="md:hidden">
+                                <span className="text-zinc-500 font-bold">
+                                    Checkbox:
+                                </span>
+                                &nbsp; check once to start chat mode
+                                conversation
+                            </p>
+                            <p>
+                                <span className="text-zinc-500 font-bold">
+                                    Scale-1.
+                                </span>
+                                &nbsp;Variability: number of answer options
+                                (from 1 to 5)
+                            </p>
+                            <p>
+                                <span className="text-zinc-500 font-bold">
+                                    Scale-2.
+                                </span>
+                                &nbsp; Variety: higher is more creative, lower
+                                is more deterministic (from 0.2 to 2, step 0.1)
+                            </p>
+                            <p>
+                                <span className="text-zinc-500 font-bold">
+                                    Scale-3.
+                                </span>
+                                &nbsp; Penalty: decreased likelihood of repeated
+                                responses in chat mode (from 0 to 1, step 0.1)
+                            </p>
+                            <p>
+                                <span className="text-zinc-500 font-bold">
+                                    Scale-4.
+                                </span>
+                                &nbsp; Answer length: the higher, the more
+                                complete the answer (from 100 tokens to 2100,
+                                step 400 tokens)
+                            </p>
+                        </div>
+                    </Modal>
+
                     <button
                         type="button"
                         onClick={() => {
@@ -280,7 +289,7 @@ const CreateChat = () => {
                     </button>
                     <button
                         className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
-                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
+                        bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 hover:ring-zinc-400 transition-all"
                         title="Clear chat history and reset settings"
                         type="button"
                         onClick={() => {
