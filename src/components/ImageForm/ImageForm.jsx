@@ -54,9 +54,11 @@ function ImageForm() {
                 </summary>
                 <p className="text-sm pt-2">
                     During peak hours on the OPEN AI server, the image
-                    generation time may increase, however, if the download does
-                    not occur after more than 40 seconds, click on the website
-                    logo to reload the page and enter the prompt again.
+                    generation time may increase, however, if the loading does
+                    not occur after more than 40 seconds, click on the
+                    website&nbsp;
+                    <span className="font-bold">logo</span> to reload the page
+                    and enter the prompt again.
                 </p>
             </details>
             <div className="flex flex-start gap-x-16">

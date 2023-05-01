@@ -3,6 +3,7 @@ import { openAI, RequestBody } from "../Api/chatGptApi";
 import { v4 as uuidv4 } from "uuid";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { GiInfo } from "react-icons/gi";
+import { GoSettings } from "react-icons/go";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import Modal from "../Modal/Modal";
@@ -229,51 +230,62 @@ const CreateChat = () => {
                         <GiInfo />
                     </button>
                     <Modal open={open} onClose={() => setOpen(false)}>
-                        <div className="text-zinc-400 text-md font-extralight leading-9">
-                            <p className="italic">
-                                The <span className="font-bold">prompt</span>{" "}
+                        <div className="text-zinc-400 text-md font-extralight leading-6">
+                            <p className="">
+                                The <span className="font-normal">prompt</span>{" "}
                                 can be entered in any language.&nbsp;
-                                <span className="font-bold">
+                                <span className="font-normal">
                                     Clear chat
                                 </span>{" "}
                                 every time when you change conversation topic.
                             </p>
                             <br />
+                            <GoSettings className="text-2xl px-1 float-right" />
                             <p className="md:hidden">
-                                <span className="text-zinc-500 font-bold">
+                                <span className="text-zinc-500 font-normal">
                                     Checkbox:
                                 </span>
                                 &nbsp; check once to start chat mode
                                 conversation
                             </p>
                             <p>
-                                <span className="text-zinc-500 font-bold">
-                                    Scale-1.
+                                <span className="text-zinc-500 font-normal underline">
+                                    Scale-1
                                 </span>
-                                &nbsp;Variability: number of answer options
-                                (from 1 to 5)
+                                &nbsp;
+                                <span className="font-bold">
+                                    Variability:
+                                </span>{" "}
+                                number of answer options (from 1 to 5)
                             </p>
                             <p>
-                                <span className="text-zinc-500 font-bold">
-                                    Scale-2.
+                                <span className="text-zinc-500 font-normal underline">
+                                    Scale-2
                                 </span>
-                                &nbsp; Variety: higher is more creative, lower
-                                is more deterministic (from 0.2 to 2, step 0.1)
+                                &nbsp;
+                                <span className="font-bold">Variety:</span>{" "}
+                                higher is more creative, lower is more
+                                deterministic (from 0.2 to 2, step 0.1)
                             </p>
                             <p>
-                                <span className="text-zinc-500 font-bold">
-                                    Scale-3.
+                                <span className="text-zinc-500 font-normal underline">
+                                    Scale-3
                                 </span>
-                                &nbsp; Penalty: decreased likelihood of repeated
-                                responses in chat mode (from 0 to 1, step 0.1)
+                                &nbsp;
+                                <span className="font-bold">Penalty:</span>{" "}
+                                decreased likelihood of repeated responses in
+                                chat mode (from 0 to 1, step 0.1)
                             </p>
                             <p>
-                                <span className="text-zinc-500 font-bold">
-                                    Scale-4.
+                                <span className="text-zinc-500 font-normal underline">
+                                    Scale-4
                                 </span>
-                                &nbsp; Answer length: the higher, the more
-                                complete the answer (from 100 tokens to 2100,
-                                step 400 tokens)
+                                &nbsp;
+                                <span className="font-bold">
+                                    Answer length:
+                                </span>{" "}
+                                the higher, the more complete the answer (from
+                                100 tokens to 2100, step 400 tokens)
                             </p>
                         </div>
                     </Modal>

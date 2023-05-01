@@ -5,7 +5,7 @@ function Footer() {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="w-full h-20 flex justify-between items-center shrink-0 bg-zinc-950 px-5">
+        <div className="w-full h-20 flex justify-between items-center shrink-0 bg-zinc-950 px-5 md:h-14">
             <div>
                 <a
                     href="mailto:post@avadakedavra.org"

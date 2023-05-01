@@ -16,7 +16,7 @@ function Header() {
                     <h1 className="text-zinc-300 text-md">
                         <Link
                             to="/"
-                            className="hover:no-underline hover:text-zinc-500 transition-all md:text-sm xs:text-xs"
+                            className="hover:no-underline hover:text-zinc-500 transition-all xs:text-xs"
                         >
                             WizardNeuralChat
                         </Link>
