@@ -24,13 +24,20 @@ export async function openAI(body = null) {
 export class RequestBody {
     model = "gpt-3.5-turbo";
     stream = false;
-    constructor(prompt, sysMsg, variability, temp, penalty, tokens) {
+    constructor(
+        prompt,
+        systemMessage,
+        variability,
+        temperature,
+        penalty,
+        tokens
+    ) {
         this.messages = [
-            ...sysMsg,
+            systemMessage,
             { role: "user", content: prompt, name: "AvadakedavraOrg" },
         ];
         this.n = variability;
-        this.temperature = temp;
+        this.temperature = temperature;
         this.presence_penalty = penalty;
         this.max_tokens = tokens;
     }

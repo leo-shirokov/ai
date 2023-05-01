@@ -40,17 +40,20 @@ function Footer() {
                     both single question and chat mode. However, it is
                     recommended that you read the information on fine-tuning the
                     model using the four scale ranges provided by clicking the{" "}
-                    <span className="text-md text-red-500">i</span> icon on the
+                    <span className="text-md text-zinc-100">i</span> icon on the
                     main page. <br />
-                    For the model to work in chat mode, it is recommended to
-                    check the checkbox once before starting communication. It is
-                    also recommended to use the maximum value of the tokens
+                    In the drop-down list of settings, you can select a role for
+                    the neural network. While the default value is the most
+                    generic, for a more deterministic conversation, the
+                    appropriate values can be used.
+                    <br />
+                    It is recommended to use the maximum value of the tokens
                     responsible for the length of the answer (scale-4) in order
                     to get the most complete answer. Scale-2 is the most
                     interesting, allowing you to adjust the
                     &quot;creativity&quot; of the model, the higher the value,
                     the less deterministic the answer will be. Increasing the
-                    values in scale-1 asks the model to look for an answer from
+                    values in Scale-1 asks the model to look for an answer from
                     different domains. <br />
                     It is very important to correctly compose the prompt. It is
                     necessary to clearly describe what you want, give clear

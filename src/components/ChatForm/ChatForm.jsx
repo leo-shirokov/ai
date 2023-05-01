@@ -7,15 +7,11 @@ import { GoSettings } from "react-icons/go";
 import ChatTextarea from "../ChatTextarea/ChatTextarea";
 import ChatResponse from "../ChatResponse/ChatResponse";
 import Modal from "../Modal/Modal";
-
-const systemMessage = {
-    role: "system",
-    content: "You are a helpful assistant",
-};
+import { rolesOptions } from "./rolesOptions";
 
 const CreateChat = () => {
     const [loading, setLoading] = useState(false);
-    const [checked, setChecked] = useState(false);
+    const [roleIndex, setRoleIndex] = useState(0);
     const [variability, setVariability] = useState(1);
     const [temperature, setTemperature] = useState(0.7);
     const [penalty, setPenalty] = useState(0);
@@ -33,7 +29,7 @@ const CreateChat = () => {
     };
 
     const setDefaultValues = () => {
-        setChecked(false);
+        setRoleIndex(roleIndex);
         setVariability(variability);
         setTemperature(temperature);
         setPenalty(penalty);
@@ -42,7 +38,7 @@ const CreateChat = () => {
 
     const clearChat = () => {
         setChatResponses([]);
-        setChecked(false);
+        setRoleIndex(0);
         setVariability(1);
         setTemperature(0.7);
         setPenalty(0);
@@ -58,17 +54,20 @@ const CreateChat = () => {
                 prompt,
             ].join("\n");
 
-            const response = await openAI(
-                new RequestBody(
-                    newQuestion,
-                    checked ? [systemMessage] : [],
-                    variability,
-                    temperature,
-                    penalty,
-                    tokens
-                )
+            const roleMessages = {
+                role: "system",
+                content: rolesOptions[roleIndex].value,
+            };
+            const requestBody = new RequestBody(
+                newQuestion,
+                roleMessages,
+                variability,
+                temperature,
+                penalty,
+                tokens
             );
 
+            const response = await openAI(requestBody);
             setDefaultValues();
             setChatResponses((prev) => [
                 ...prev,
@@ -94,40 +93,19 @@ const CreateChat = () => {
 
                 {chatSettings && (
                     <div className="flex justify-center gap-x-10 items-center px-3 md:flex-col md:gap-y-5 md:px-0">
-                        <div className="flex justify-center items-center md:self-start">
-                            <input
-                                className="relative float-left h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] 
-                                border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none 
-                                before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full 
-                                before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] 
-                                before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] 
-                                checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block 
-                                checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 
-                                checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 
-                                checked:after:border-solid checked:after:border-white checked:after:bg-transparent 
-                                checked:after:content-[''] hover:cursor-pointer hover:before:opacity-[0.04] 
-                                hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none 
-                                focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] 
-                                focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] 
-                                focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] 
-                                focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] 
-                                checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] 
-                                checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px 
-                                checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] 
-                                checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] 
-                                checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid 
-                                checked:focus:after:border-white checked:focus:after:bg-transparent dark:border-neutral-600 
-                                dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] 
-                                dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] shadow-[0_0_15px_rgba(0,0,0,0.50)]"
-                                type="checkbox"
-                                checked={checked}
-                                onChange={(e) => setChecked(e.target.checked)}
-                                title="Check once for chat mode"
-                            />
-                            <p className="hidden text-xs text-zinc-400 pl-4 md:block">
-                                Mark once to start a chat conversation
-                            </p>
-                        </div>
+                        <select
+                            className="w-1/4 h-7 bg-zinc-600 text-sm text-zinc-300 rounded-md p-1 shadow-[0_0_15px_rgba(0,0,0,0.50)] 
+                            hover:ring-1 hover:ring-zinc-400 transition-all focus:outline-none xl:w-1/3 lg:w-4/5 md:w-11/12"
+                            onChange={(e) => setRoleIndex(e.target.value)}
+                            value={roleIndex}
+                        >
+                            {rolesOptions.map((option, i) => (
+                                <option key={option.name} value={i}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </select>
+
                         <div className="w-1/4 flex flex-col justify-center items-center gap-y-5 xl:w-1/3 lg:w-4/5 md:w-11/12 md:gap-y-6">
                             <div className="w-full flex flex-col justify-center items-center gap-y-2">
                                 <div className="w-full flex justify-between items-center text-xs text-zinc-400">
@@ -241,12 +219,12 @@ const CreateChat = () => {
                             </p>
                             <br />
                             <GoSettings className="text-2xl px-1 float-right" />
-                            <p className="md:hidden">
-                                <span className="text-zinc-500 font-normal">
-                                    Checkbox:
+                            <p>
+                                <span className="text-zinc-500 font-normal underline">
+                                    Drop-down list:
                                 </span>
-                                &nbsp; check once to start chat mode
-                                conversation
+                                &nbsp; select chat behavior role (default is
+                                helpful assistant, suitable for most cases)
                             </p>
                             <p>
                                 <span className="text-zinc-500 font-normal underline">
