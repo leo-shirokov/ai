@@ -49,6 +49,9 @@ function ImageForm() {
         "bitcoin",
         "puppy",
         "moon landscape",
+        "doomsday clock",
+        "coral reef",
+        "ocean floor",
     ];
     const randomSurprise = Math.floor(Math.random() * (surprises.length - 1));
     const surprise = surprises[randomSurprise];
@@ -80,22 +83,23 @@ function ImageForm() {
                 <p className="text-sm pt-2">
                     During peak hours on the OPEN AI server, the image
                     generation time may increase, however, if the loading does
-                    not occur after more than 40 seconds, click on the
-                    website&nbsp;
-                    <span className="font-bold">logo</span> to reload the page
-                    and enter the prompt again.
+                    not occur after more than 40 seconds, click on website name
+                    to reload the page, click on image icon and enter the prompt
+                    again. <br />
+                    The DALL·E - image generator API is in beta mode, so there
+                    may sometimes be problems with its operation.
                 </p>
             </details>
-            <div className="flex flex-start gap-x-16 mb-10">
+            <div className="flex flex-start h-8  gap-x-6 mb-10">
                 <button
-                    className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                    className="whitespace-nowrap text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
                     bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                     onClick={() => setContent([])}
                 >
                     Clear results
                 </button>
                 <button
-                    className="text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
+                    className="whitespace-nowrap text-md text-zinc-500 shadow-[0_0_15px_rgba(0,0,0,0.50)]
                     bg-zinc-700 rounded-md px-2 py-0.5 hover:text-zinc-400 hover:ring-1 transition-all"
                     onClick={() => onSubmitForm(surprise)}
                 >
