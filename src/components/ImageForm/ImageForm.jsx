@@ -83,9 +83,8 @@ function ImageForm() {
                 <p className="text-sm pt-2">
                     During peak hours on the OPEN AI server, the image
                     generation time may increase, however, if the loading does
-                    not occur after more than 40 seconds, click on website name
-                    to reload the page, click on image icon and enter the prompt
-                    again. <br />
+                    not occur after more than 40 seconds, click on website logo
+                    to reload the page and enter the prompt again. <br />
                     The DALL·E - image generator API is in beta mode, so there
                     may sometimes be problems with its operation.
                 </p>

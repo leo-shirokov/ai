@@ -9,7 +9,7 @@ function Header() {
             <div className="h-full flex justify-between items-center">
                 <div className="flex justify-center items-center gap-5 hover:cursor-pointer">
                     <img
-                        // onClick={() => location.reload()}
+                        onClick={() => location.reload()}
                         className="h-8"
                         src={logo}
                     />
