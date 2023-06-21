@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import ChatForm from './components/ChatForm/ChatForm'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
-import ImageForm from './components/ImageForm/ImageForm'
+import ChatForm from './pages/ChatForm'
 import { HowToUse } from './pages/HowToUse'
+import ImageForm from './pages/ImageForm'
 import { Welcome } from './pages/Welcome'
 
 function App() {

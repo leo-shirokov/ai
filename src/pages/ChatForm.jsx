@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { GiInfo, GiSettingsKnobs } from 'react-icons/gi'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-import { RequestBody, openAI } from '../Api/chatGptApi'
-import ChatResponse from '../ChatResponse/ChatResponse'
-import ChatTextarea from '../ChatTextarea/ChatTextarea'
-import { rolesOptions } from './rolesOptions'
+import { RequestBody, openAI } from '../components/Api/chatGptApi'
+import ChatResponse from '../components/ChatResponse/ChatResponse'
+import ChatTextarea from '../components/ChatTextarea/ChatTextarea'
+import { rolesOptions } from '../utils/rolesOptions'
 
 const CreateChat = () => {
 	const [loading, setLoading] = useState(false)
@@ -46,15 +46,15 @@ const CreateChat = () => {
 			const currentDate = new Date()
 			const currentDay = currentDate.getDate()
 			const storedDay = localStorage.getItem('requestDay')
-			let requestCount = localStorage.getItem('requestCount')
-			if (!requestCount || storedDay !== currentDay.toString()) {
-				requestCount = 0
-				localStorage.setItem('requestCount', requestCount)
+			let chatCount = localStorage.getItem('chatCount')
+			if (!chatCount || storedDay !== currentDay.toString()) {
+				chatCount = 0
+				localStorage.setItem('chatCount', chatCount)
 				localStorage.setItem('requestDay', currentDay)
 			}
 
-			if (requestCount >= 10) {
-				console.log('Превышено максимальное количество запросов.')
+			if (chatCount >= 10) {
+				console.log('Maximum number of requests exceeded')
 				return
 			}
 
@@ -88,10 +88,10 @@ const CreateChat = () => {
 				},
 			])
 			setLoading(false)
-			requestCount++
-			localStorage.setItem('requestCount', requestCount)
+			chatCount++
+			localStorage.setItem('chatCount', chatCount)
 		} catch (error) {
-			console.log('Ошибка при отправке сообщения:', error.message)
+			console.log('Error:', error.message)
 		}
 	}
 
