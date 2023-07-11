@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { RequestBody, openAI } from '../components/Api/chatGptApi'
 import ChatResponse from '../components/ChatResponse/ChatResponse'
 import ChatTextarea from '../components/ChatTextarea/ChatTextarea'
+import Loader from '../components/Loader/Loader'
 import { rolesOptions } from '../utils/rolesOptions'
 
 const CreateChat = () => {
@@ -43,21 +44,6 @@ const CreateChat = () => {
 
 	const sendMessage = async (prompt) => {
 		try {
-			const currentDate = new Date()
-			const currentDay = currentDate.getDate()
-			const storedDay = localStorage.getItem('requestDay')
-			let chatCount = localStorage.getItem('chatCount')
-			if (!chatCount || storedDay !== currentDay.toString()) {
-				chatCount = 0
-				localStorage.setItem('chatCount', chatCount)
-				localStorage.setItem('requestDay', currentDay)
-			}
-
-			if (chatCount >= 10) {
-				console.log('Maximum number of requests exceeded')
-				return
-			}
-
 			setLoading(true)
 
 			const newQuestion = [
@@ -88,8 +74,6 @@ const CreateChat = () => {
 				},
 			])
 			setLoading(false)
-			chatCount++
-			localStorage.setItem('chatCount', chatCount)
 		} catch (error) {
 			console.log('Error:', error.message)
 		}
@@ -243,16 +227,7 @@ const CreateChat = () => {
 						>
 							Clear chat
 						</button>
-						{loading && (
-							<div
-								className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]'
-								role='status'
-							>
-								<span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
-									Loading...
-								</span>
-							</div>
-						)}
+						{loading && <Loader />}
 					</div>
 				</form>
 

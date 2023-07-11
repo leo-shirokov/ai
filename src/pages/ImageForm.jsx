@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import GetApiKey from '../components/Api/GetApiKey'
 import ChatTextarea from '../components/ChatTextarea/ChatTextarea'
+import Loader from '../components/Loader/Loader'
 import Modal from '../components/Modal/Modal'
 import { surprises } from '../utils/randomImages'
 
@@ -33,21 +34,6 @@ function ImageForm() {
 
 	const onSubmitForm = async (newValue) => {
 		try {
-			const currentDate = new Date()
-			const currentDay = currentDate.getDate()
-			const storedDay = localStorage.getItem('requestDay')
-			let imageCount = localStorage.getItem('imageCount')
-			if (!imageCount || storedDay !== currentDay.toString()) {
-				imageCount = 0
-				localStorage.setItem('imageCount', imageCount)
-				localStorage.setItem('requestDay', currentDay)
-			}
-
-			if (imageCount >= 10) {
-				console.log('Maximum number of requests exceeded')
-				return
-			}
-
 			setLoading(true)
 			const body = {
 				prompt: newValue,
@@ -58,8 +44,6 @@ function ImageForm() {
 			const images = await getApiContent(body)
 			setContent(images.map((im) => im.url))
 			setLoading(false)
-			imageCount++
-			localStorage.setItem('imageCount', imageCount)
 		} catch (error) {
 			console.log('error sending message: ', error.message)
 		}
@@ -96,16 +80,7 @@ function ImageForm() {
 				>
 					Surprise me
 				</button>
-				{loading && (
-					<div
-						className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-secondary motion-reduce:animate-[spin_1.5s_linear_infinite]'
-						role='status'
-					>
-						<span className='!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]'>
-							Loading...
-						</span>
-					</div>
-				)}
+				{loading && <Loader />}
 			</div>
 
 			<div className='grid grid-cols-2 grid-rows-2 gap-5 w-full overflow-y-auto md:grid-cols-none md:grid-rows-2 pb-20'>
