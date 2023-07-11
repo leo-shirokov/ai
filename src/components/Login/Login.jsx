@@ -79,9 +79,9 @@ function Login() {
 					>
 						Sign Up{' '}
 					</button>
-					{msg && <pre>{msg}</pre>}
 				</div>
 			</form>
+			{msg && <pre>{msg}</pre>}
 		</div>
 	)
 }
